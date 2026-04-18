@@ -177,7 +177,7 @@ export default function OurExpertise() {
     }
   ]
 
-  // Reusable Section Component
+  // Reusable Section Component with Mobile Horizontal Scroll
   const ServiceSection = ({ title, items }) => (
     <div className="mb-24">
       {/* Animated Section Title */}
@@ -191,72 +191,80 @@ export default function OurExpertise() {
         </div>
       </AnimatedSection>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {items.map((service, index) => (
-          /* Staggered Card Animation */
-          <AnimatedSection
-            key={index}
-            animationClass="opacity-0 translate-y-12"
-            delay={index * 100} // Cards cascade in 100ms apart
-            className="h-full"
-          >
-            <div
-              onClick={() => handleServiceClick(service.title)}
-              className="h-full group relative flex flex-col rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#6EDD4D]/50 hover:shadow-[0_0_40px_rgba(110,221,77,0.1)] cursor-pointer"
-            >
-              {/* Visual Header (Image/Video) */}
-              <div className="aspect-video w-full overflow-hidden bg-zinc-950 relative">
-                {service.video ? (
-                  <video
-                    autoPlay loop muted playsInline
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  >
-                    <source src={service.video} type="video/mp4" />
-                  </video>
-                ) : (
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                )}
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-[#6EDD4D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+      {/* --- MOBILE HORIZONTAL SCROLL WRAPPER --- */}
+      <div className="relative">
+        <div className="overflow-x-auto no-scrollbar pb-10 -mx-6 px-6">
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-w-max md:min-w-full">
+            {items.map((service, index) => (
+              <AnimatedSection
+                key={index}
+                animationClass="opacity-0 translate-y-12"
+                delay={index * 100}
+                // Cards are flex-shrink-0 and fixed width on mobile
+                className="h-full w-[300px] md:w-auto flex-shrink-0 md:flex-shrink"
+              >
+                <div
+                  onClick={() => handleServiceClick(service.title)}
+                  className="h-full group relative flex flex-col rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#6EDD4D]/50 hover:shadow-[0_0_40px_rgba(110,221,77,0.1)] cursor-pointer"
+                >
+                  {/* Visual Header */}
+                  <div className="aspect-video w-full overflow-hidden bg-zinc-950 relative">
+                    {service.video ? (
+                      <video
+                        autoPlay loop muted playsInline
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      >
+                        <source src={service.video} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-[#6EDD4D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
 
-              {/* Content Area */}
-              <div className="p-8 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#6EDD4D] transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                  {service.description}
-                </p>
+                  {/* Content Area */}
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#6EDD4D] transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                      {service.description}
+                    </p>
 
-                {/* Features List */}
-                <ul className="mt-auto space-y-3">
-                  {service.features.map((item, i) => (
-                    <li key={i} className="flex items-center text-sm text-zinc-300">
-                      <span className="mr-3 flex h-5 w-5 items-center justify-center rounded-full bg-[#6EDD4D]/10 text-[10px] text-[#6EDD4D]">
-                        ✔
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </AnimatedSection>
-        ))}
+                    <ul className="mt-auto space-y-3">
+                      {service.features.map((item, i) => (
+                        <li key={i} className="flex items-center text-sm text-zinc-300">
+                          <span className="mr-3 flex h-5 w-5 items-center justify-center rounded-full bg-[#6EDD4D]/10 text-[10px] text-[#6EDD4D]">
+                            ✔
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
 
   return (
-    <main className="min-h-screen  text-zinc-100 font-sans selection:bg-[#6EDD4D]/30">  
+    <main className="min-h-screen text-zinc-100 font-sans selection:bg-[#6EDD4D]/30 overflow-x-hidden">
+      {/* Global CSS for hiding scrollbars */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}} />
 
       <div className="relative z-10">
-        {/* Page Hero Header */}
         <header className="py-24 md:py-12 px-6 text-center border-b border-zinc-900 backdrop-blur-md mb-16 mt-[-40px] md:mt-[-80px]">
           <div className="container mx-auto pt-20">
             <AnimatedSection animationClass="opacity-0 translate-y-10">
@@ -273,7 +281,6 @@ export default function OurExpertise() {
           </div>
         </header>
 
-        {/* Content Container */}
         <div className="container mx-auto px-6 pb-24">
           <ServiceSection title="BIM Services" items={bimServices} />
           <ServiceSection title="BIM Consulting" items={bimConsulting} />
