@@ -56,7 +56,7 @@ const ServicesPageContent = () => {
             description: 'Precise, technically accurate drawings for seamless construction execution.',
             features: ['GFC Drawings', 'Working Drawings', 'Shop Drawings (MEPF)', 'As-Built Drawings', 'Tender Drawings', 'Detail Sections'],
             benefits: ['Smooth Site Execution', 'International Compliance', 'Multi-disciplinary Coordination'],
-            image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80'
+            image: 'https://res.cloudinary.com/deinrj3zm/image/upload/v1776588658/2D.Desktop_kxaknt.png'
         },
         {
             id: '3d',
@@ -64,7 +64,7 @@ const ServicesPageContent = () => {
             description: 'Advanced modeling and visualization for enhanced project understanding.',
             features: ['3D Architectural Modeling', 'Photorealistic Rendering', 'Virtual Tours', '3D Animation', 'Material Visualization'],
             benefits: ['Clash-Free Models', 'Stakeholder Engagement', 'Spatial Relationship Clarity'],
-            image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80'
+            image: 'https://res.cloudinary.com/deinrj3zm/image/upload/v1776588660/3D.Desktop_f37aeh.png'
         },
         {
             id: '4d',
@@ -80,7 +80,7 @@ const ServicesPageContent = () => {
             description: 'Comprehensive management for coordination and execution clarity.',
             features: ['Project Programming', 'Cost Management', 'Quality Control', 'Risk Management', 'Progress Reporting'],
             benefits: ['Real-time Visibility', 'Strategic Resource Use', 'Predictive Scheduling'],
-            image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80'
+            image: 'https://res.cloudinary.com/deinrj3zm/image/upload/v1776588661/PP_C.Desktop_aothw4.png'
         },
         {
             id: 'boq',
@@ -88,7 +88,7 @@ const ServicesPageContent = () => {
             description: 'Detailed Bill of Quantities for accurate financial transparency.',
             features: ['Quantity Take-Off', 'BOQ Preparation', 'Cost Analysis', 'Procurement Tracking', 'Variation Analysis'],
             benefits: ['Budget Precision', 'Transparent Procurement', 'Streamlined Billing'],
-            image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80'
+            image: 'https://res.cloudinary.com/deinrj3zm/image/upload/v1776588665/BOQ.Desktop_ytxtzi.png'
         },
         {
             id: 'audit',
@@ -96,7 +96,7 @@ const ServicesPageContent = () => {
             description: 'Comprehensive quality assurance and technical verification.',
             features: ['Design Peer Review', 'Model Cross-Verification', 'Payment Verification', 'As-Built Validation', 'Compliance Review'],
             benefits: ['Risk Reduction', 'High Stakeholder Confidence', 'Accurate Account Settlement'],
-            image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80'
+            image: 'https://res.cloudinary.com/deinrj3zm/image/upload/v1776588667/Audit.Desktop_qavsh1.png'
         }
     ]
 

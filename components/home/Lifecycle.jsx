@@ -51,7 +51,7 @@ export default function Lifecycle({ onContactClick }) {
   }
 
   return (
-    <section className="container mx-auto px-6 py-24 relative overflow-hidden">
+    <section className="container mx-auto px-6 -mt-20 pt-0 pb-12 relative overflow-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes subtleFloating {
@@ -64,7 +64,7 @@ export default function Lifecycle({ onContactClick }) {
       `}} />
 
       {/* Header */}
-      <div className="text-center mb-20">
+      <div className="text-center mb-12">
         <AnimatedSection animationClass="opacity-0 translate-y-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
             End-to-End <span className="text-[#6EDD4D]">Lifecycle</span>
@@ -94,8 +94,8 @@ export default function Lifecycle({ onContactClick }) {
                     onMouseEnter={() => { if (window.innerWidth > 1024) setActiveStage(stage.id) }}
                     onMouseLeave={() => { if (window.innerWidth > 1024) setActiveStage(null) }}
                     className={`relative flex flex-col items-center text-center p-8 rounded-[2.5rem] transition-all duration-700 cursor-pointer border ${isActive
-                        ? 'bg-zinc-900/80 border-[#6EDD4D]/40 shadow-[0_0_40px_rgba(110,221,77,0.1)]'
-                        : 'bg-zinc-900/20 border-white/5 hover:border-white/10'
+                      ? 'bg-zinc-900/80 border-[#6EDD4D]/40 shadow-[0_0_40px_rgba(110,221,77,0.1)]'
+                      : 'bg-zinc-900/20 border-white/5 hover:border-white/10'
                       }`}
                   >
                     {/* Image Container */}
@@ -140,7 +140,15 @@ export default function Lifecycle({ onContactClick }) {
       </div>
 
       {/* Static Contact Button */}
-      <div className="flex justify-center pt-8">
+      <div className="flex flex-col items-center pt-8">
+
+        {/* NEW HEADING HERE */}
+        <AnimatedSection animationClass="opacity-0 translate-y-4" className="text-center">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-10 -mt-16 tracking-tight">
+            Got a challenge or idea?
+          </h3>
+        </AnimatedSection>
+
         <AnimatedSection animationClass="opacity-0 scale-90">
           <button
             onClick={onContactClick}
@@ -148,7 +156,7 @@ export default function Lifecycle({ onContactClick }) {
           >
             <div className="absolute inset-0 bg-[#6EDD4D] translate-y-full group-hover:translate-y-0 transition-transform duration-500 -z-10"></div>
             <span className="flex items-center gap-4">
-              CONTACT
+              Let's Solve it Together
               <i className="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
             </span>
           </button>

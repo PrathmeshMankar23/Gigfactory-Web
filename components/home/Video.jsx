@@ -25,10 +25,8 @@ const Videos = () => {
   }, [activeModal]);
 
   return (
-    <section className="py-20 px-6 overflow-hidden">
-      {/* Animation Styles */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
+    <section className="pt-0 pb-20 px-6 overflow-hidden -mt-[40px] md:-mt-[80x]">      <style dangerouslySetInnerHTML={{
+      __html: `
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }

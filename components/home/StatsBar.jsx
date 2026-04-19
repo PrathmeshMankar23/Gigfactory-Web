@@ -42,7 +42,7 @@ export default function StatsBar() {
     ]
 
     return (
-        <section className="py-12 w-full px-6 flex justify-center md:mt-[-20px] md:mb-[-70px]">
+        <section className="py-12 w-full px-6 flex justify-center md:mt-[-60px] md:mb-[-80px]">
             {/* Main Container */}
             <AnimatedSection
                 animationClass="opacity-0 scale-75"

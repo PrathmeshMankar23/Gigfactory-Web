@@ -5,9 +5,12 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import ContactModal from '@/components/home/ContactModal'
+import GigExpertForm from '@/components/form/GigExpertForm'
+
 
 export default function Footer() {
     const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+    const [isGigExpertFormOpen, setIsGigExpertFormOpen] = useState(false)
 
     // Animation Variants
     const containerVariants = {
@@ -38,7 +41,7 @@ export default function Footer() {
 
             <div className="container mx-auto px-6 relative z-10 max-w-7xl">
 
-                {/* Main Grid: Increased gap for better breathing room */}
+                {/* Main Grid */}
                 <motion.div
                     className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20"
                     variants={containerVariants}
@@ -47,20 +50,19 @@ export default function Footer() {
                     viewport={{ once: true }}
                 >
 
-                    {/* Section 1: Logo (3 Cols) */}
+                    {/* Section 1: Brand (Icon removed) */}
                     <motion.div variants={itemVariants} className="lg:col-span-3 flex flex-col gap-6">
-                        <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-[#6EDD4D] rounded flex items-center justify-center">
-                                <div className="w-5 h-5 bg-dark-base rotate-45"></div>
-                            </div>
-                            <span className="text-3xl font-bold text-white tracking-tight">Gigfactory<span className="text-[#6EDD4D]">.</span></span>
+                        <div className="flex items-center">
+                            <span className="text-3xl font-bold text-white tracking-tight">
+                                Gigfactory<span className="text-[#6EDD4D]"></span>
+                            </span>
                         </div>
                         <p className="text-zinc-400 text-base leading-relaxed max-w-xs font-medium">
                             Global Capability Center providing cutting-edge BIM and construction services worldwide. Engineering the future of infrastructure.
                         </p>
                     </motion.div>
 
-                    {/* Middle Sections (7 Cols) - Increased gap-12 and text-base */}
+                    {/* Middle Sections (7 Cols) */}
                     <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-12">
                         {/* Column 1 */}
                         <motion.div variants={itemVariants}>
@@ -77,9 +79,12 @@ export default function Footer() {
                         <motion.div variants={itemVariants}>
                             <h3 className="text-[#6EDD4D] font-bold text-lg uppercase tracking-widest mb-8">Services</h3>
                             <ul className="space-y-5 text-zinc-400 text-base font-medium">
-                                <li><Link href="/services?service=3d" className="hover:text-[#6EDD4D] transition-colors">3D Services</Link></li>
+                                <li><Link href="/services?service=3d" className="hover:text-[#6EDD4D] transition-colors">2D Services</Link></li>
+                                <li><Link href="/services?service=3d" className="hover:text-[#6EDD4D] transition-colors">BIM 3D Services</Link></li>
                                 <li><Link href="/services?service=4d" className="hover:text-[#6EDD4D] transition-colors">4D Services</Link></li>
-                                <li><Link href="/services?service=boq" className="hover:text-[#6EDD4D] transition-colors">BOQ</Link></li>
+                                <li><Link href="/services?service=boq" className="hover:text-[#6EDD4D] transition-colors">Project Planning & Controls</Link></li>
+                                <li><Link href="/services?service=3d" className="hover:text-[#6EDD4D] transition-colors">BOQ & Quantity Intelligence</Link></li>
+                                <li><Link href="/services?service=3d" className="hover:text-[#6EDD4D] transition-colors">Audit & Verification Services</Link></li>
                             </ul>
                         </motion.div>
 
@@ -89,7 +94,14 @@ export default function Footer() {
                             <ul className="space-y-5 text-zinc-400 text-base font-medium">
                                 <li><Link href="/about" className="hover:text-[#6EDD4D] transition-colors">About</Link></li>
                                 <li><Link href="/projects" className="hover:text-[#6EDD4D] transition-colors">Projects</Link></li>
-                                <li><Link href="/faq" className="hover:text-[#6EDD4D] transition-colors">FAQ</Link></li>
+                                <li>
+                                    <button
+                                        onClick={() => setIsGigExpertFormOpen(true)}
+                                        className="hover:text-[#6EDD4D] transition-colors text-left"
+                                    >
+                                        GigExpert Feedback Form
+                                    </button>
+                                </li>
                             </ul>
                         </motion.div>
 
@@ -98,7 +110,7 @@ export default function Footer() {
                             <h3 className="text-[#6EDD4D] font-bold text-lg uppercase tracking-widest mb-8">Contact</h3>
                             <ul className="space-y-5 text-zinc-400 text-base font-medium">
                                 <li><a href="tel:+919876543210" className="hover:text-[#6EDD4D] transition-colors">Call</a></li>
-                                <li><Link href="/contact" className="hover:text-[#6EDD4D] transition-colors">Support</Link></li>
+                                <li><Link href="/contact" className="hover:text-[#6EDD4D] transition-colors">Email</Link></li>
                             </ul>
                         </motion.div>
                     </div>
@@ -143,6 +155,13 @@ export default function Footer() {
                 <ContactModal
                     isOpen={isContactModalOpen}
                     onClose={() => setIsContactModalOpen(false)}
+                />
+            )}
+
+            {isGigExpertFormOpen && (
+                <GigExpertForm
+                    isOpen={isGigExpertFormOpen}
+                    onClose={() => setIsGigExpertFormOpen(false)}
                 />
             )}
         </footer>

@@ -147,53 +147,52 @@ export default function Advantages({ onContactClick }) {
     }, [selectedAdvantageId])
 
     return (
-        <section className="relative w-full py-16 px-6">
-            <div className="container mx-auto">
-                <div className="relative overflow-hidden rounded-[3rem] border border-zinc-800 bg-zinc-900/50 backdrop-blur-xl p-10 md:p-16 text-center shadow-2xl">
+        <section className="relative w-full py-16 px-6 -mt-16">            <div className="container mx-auto">
+            <div className="relative overflow-hidden rounded-[3rem] border border-zinc-800 bg-zinc-900/50 backdrop-blur-xl p-10 md:p-16 text-center shadow-2xl">
 
-                    {/* Background Glow Effect Updated to #6EDD4D */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6EDD4D]/5 blur-[100px]"></div>
+                {/* Background Glow Effect Updated to #6EDD4D */}
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6EDD4D]/5 blur-[100px]"></div>
 
-                    <div className="relative z-10 mb-12">
-                        <h2 className="mb-4 text-3xl font-bold text-white md:text-5xl">
-                            Advantages of working with Gigfactory
-                        </h2>
-                        <p className="mx-auto max-w-2xl text-zinc-400 text-lg">
-                            We don&apos;t just support projects - we improve performance across time, cost, coordination and lifecycle value.
-                        </p>
-                    </div>
-
-                    {/* Word Cloud with #6EDD4D Highlights */}
-                    <div className="relative z-10 mx-auto mb-16 flex max-w-5xl flex-wrap justify-center gap-3">
-                        {allTags.map((tag, i) => {
-                            const isHighlight = typeof tag === 'object' && tag.highlight;
-                            const tagName = isHighlight ? tag.name : tag;
-
-                            return (
-                                <span
-                                    key={i}
-                                    onClick={() => isHighlight ? handleHighlightClick(tagName) : undefined}
-                                    className={`rounded-full border px-5 py-2.5 text-sm md:text-base font-medium transition-all duration-300 ${isHighlight
-                                        ? 'cursor-pointer border-[#6EDD4D] bg-[#6EDD4D]/10 text-[#6EDD4D] shadow-[0_0_15px_rgba(110,221,77,0.15)] hover:bg-[#6EDD4D] hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(110,221,77,0.3)]'
-                                        : 'cursor-default border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
-                                        }`}
-                                >
-                                    {tagName}
-                                </span>
-                            )
-                        })}
-                    </div>
-
-                    {/* CTA Button Updated to #6EDD4D */}
-                    <button
-                        onClick={onContactClick}
-                        className="group relative z-10 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#6EDD4D] bg-transparent px-8 py-4 font-bold text-[#6EDD4D] transition-all hover:bg-[#6EDD4D] hover:text-zinc-950 hover:shadow-[0_0_30px_rgba(110,221,77,0.3)]"
-                    >
-                        <span>Looking for smart construction solutions? Let&apos;s talk</span>
-                        <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </button>
+                <div className="relative z-10 mb-12">
+                    <h2 className="mb-4 text-3xl font-bold text-white md:text-5xl">
+                        Advantages of working <span className="text-[#6EDD4D]">with Gigfactory</span>
+                    </h2>
+                    <p className="mx-auto max-w-2xl text-zinc-400 text-lg">
+                        We don&apos;t just support projects - we improve performance across time, cost, coordination and lifecycle value.
+                    </p>
                 </div>
+
+                {/* Word Cloud with #6EDD4D Highlights */}
+                <div className="relative z-10 mx-auto mb-16 flex max-w-5xl flex-wrap justify-center gap-3">
+                    {allTags.map((tag, i) => {
+                        const isHighlight = typeof tag === 'object' && tag.highlight;
+                        const tagName = isHighlight ? tag.name : tag;
+
+                        return (
+                            <span
+                                key={i}
+                                onClick={() => isHighlight ? handleHighlightClick(tagName) : undefined}
+                                className={`rounded-full border px-5 py-2.5 text-sm md:text-base font-medium transition-all duration-300 ${isHighlight
+                                    ? 'cursor-pointer border-[#6EDD4D] bg-[#6EDD4D]/10 text-[#6EDD4D] shadow-[0_0_15px_rgba(110,221,77,0.15)] hover:bg-[#6EDD4D] hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(110,221,77,0.3)]'
+                                    : 'cursor-default border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
+                                    }`}
+                            >
+                                {tagName}
+                            </span>
+                        )
+                    })}
+                </div>
+
+                {/* CTA Button Updated to #6EDD4D */}
+                <button
+                    onClick={onContactClick}
+                    className="group relative z-10 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#6EDD4D] bg-transparent px-8 py-4 font-bold text-[#6EDD4D] transition-all hover:bg-[#6EDD4D] hover:text-zinc-950 hover:shadow-[0_0_30px_rgba(110,221,77,0.3)]"
+                >
+                    <span>Looking for smart construction solutions? Let&apos;s talk</span>
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                </button>
             </div>
+        </div>
 
             {selectedAdvantageId && (
                 <div

@@ -94,7 +94,7 @@ export default function CaseStudies({ onContactClick }) {
   }
 
   return (
-    <section id="case-studies" className="container mx-auto px-6 py-20 border-t border-zinc-800/50 overflow-hidden">
+    <section id="case-studies" className="container mx-auto px-6 py-20 -mt-24 border-t border-zinc-800/50 overflow-hidden">
 
       {/* Custom Scrollbar Styles */}
       <style dangerouslySetInnerHTML={{
@@ -118,7 +118,7 @@ export default function CaseStudies({ onContactClick }) {
       {/* Header */}
       <div className="text-center mb-16">
         <AnimatedSection animationClass="opacity-0 translate-y-10" delay={0}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Our Case Studies</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 -mt-12 tracking-tight">Our Case <span className="text-[#6EDD4D]">Studies</span></h2>
         </AnimatedSection>
         <AnimatedSection animationClass="opacity-0 translate-y-10" delay={150}>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">

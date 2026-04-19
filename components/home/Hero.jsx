@@ -37,20 +37,19 @@ const AnimatedSection = ({ children, animationClass, className = "", delay = 0 }
 export default function Hero({ onContactClick }) {
   const [currentImg, setCurrentImg] = useState(0)
 
-  // Array of 6 background images
+  // Array of background images
   const images = [
-    "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2070",
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2070",
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070",
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
-    "https://images.unsplash.com/photo-1531834304451-492bb14d484b?q=80&w=2070",
-    "https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=2070"
+    "https://res.cloudinary.com/deinrj3zm/image/upload/v1776589095/1_gv7pis.png",
+    "https://res.cloudinary.com/deinrj3zm/image/upload/v1776589098/Screenshot_2026-04-11_102220_uo0pcb.png",
+    "https://res.cloudinary.com/deinrj3zm/image/upload/v1776589091/Screenshot_2026-03-27_125503_ornn0g.png",
+    "https://res.cloudinary.com/deinrj3zm/image/upload/v1776589101/Screenshot_2026-04-15_173533_zcn2tm.png",
+    "https://res.cloudinary.com/deinrj3zm/image/upload/v1776589097/Screenshot_2026-04-02_110457_tqn0kt.png",
   ]
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImg((prev) => (prev + 1) % images.length)
-    }, 5000) // Changes every 5 seconds
+    }, 5000)
     return () => clearInterval(interval)
   }, [images.length])
 
@@ -79,15 +78,18 @@ export default function Hero({ onContactClick }) {
         {images.map((img, index) => (
           <div
             key={index}
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 brightness-[0.85] saturate-[1.1]"
             style={{
               backgroundImage: `url(${img})`,
-              opacity: currentImg === index ? 0.2 : 0
+              // Increased opacity to 0.45 for much better visibility
+              opacity: currentImg === index ? 0.45 : 0
             }}
           />
         ))}
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/40 to-zinc-950/90" />
+
+        {/* Adjusted Gradient: Keeping edges dark for text readability, but clearing the center */}
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-zinc-950/10 to-zinc-950/90" />
+        <div className="absolute inset-0 bg-zinc-950/20" /> {/* Overall subtle dark wash */}
       </div>
 
       {/* --- TECH GRID & GLOW LAYER --- */}
@@ -102,33 +104,35 @@ export default function Hero({ onContactClick }) {
       {/* --- FOREGROUND CONTENT --- */}
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
 
-        {/* Blinking Badge (The line above heading) */}
+        {/* Blinking Badge */}
         <AnimatedSection animationClass="opacity-0 translate-y-4" delay={0}>
-          <div className="mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#6EDD4D]/30 bg-[#6EDD4D]/10 text-[#6EDD4D] text-xs font-bold tracking-widest uppercase animate-blink">
+          <div className="mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#6EDD4D]/40 bg-[#6EDD4D]/20 text-[#6EDD4D] text-xs font-bold tracking-widest uppercase animate-blink backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-[#6EDD4D] shadow-[0_0_8px_#6EDD4D]" />
             Leading Construction Tech
           </div>
         </AnimatedSection>
 
-        {/* Heading with colored text */}
+        {/* Heading - Added drop shadow for clarity against images */}
         <AnimatedSection animationClass="opacity-0 translate-y-12" delay={200}>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 tracking-tight max-w-5xl drop-shadow-2xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 tracking-tight max-w-5xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
             Global Capacity Center <br className="hidden md:block" />
             <span className="text-[#6EDD4D]">for Construction Services</span>
           </h1>
         </AnimatedSection>
 
+        {/* Paragraph - Increased contrast */}
         <AnimatedSection animationClass="opacity-0 translate-y-12" delay={400}>
-          <p className="text-lg md:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-white max-w-3xl mx-auto mb-12 leading-relaxed drop-shadow-md font-medium">
             Technology-enabled platform for integrated BIM planning, designing & engineering. Project reference across 10+ Million Sqft.
           </p>
         </AnimatedSection>
 
+        {/* Button */}
         <AnimatedSection animationClass="opacity-0 scale-50" delay={600}>
           <div className="flex justify-center">
             <button
               onClick={onContactClick}
-              className="bg-[#6EDD4D] text-black font-black px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:bg-[#5bc43f] shadow-[0_0_40px_rgba(110,221,77,0.4)] flex items-center gap-3"
+              className="bg-[#6EDD4D] text-black font-black px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:bg-[#5bc43f] shadow-[0_0_40px_rgba(110,221,77,0.5)] flex items-center gap-3"
             >
               Let&apos;s Connect <span className="text-2xl leading-none">→</span>
             </button>
