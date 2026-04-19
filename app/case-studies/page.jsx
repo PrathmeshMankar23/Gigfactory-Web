@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Building2, Home, Factory, HeartPulse, GraduationCap, Ship, Zap, Network, ShoppingBag, Server } from 'lucide-react'
+import { ArrowRight, Building2, Home, Factory, HeartPulse, GraduationCap, Ship, Zap, Network, ShoppingBag, Server, MoveRight } from 'lucide-react'
+import ContactModal from '@/components/home/ContactModal'
 
 // --- ANIMATION WRAPPER ---
 const AnimatedSection = ({ children, animationClass, className = "", delay = 0 }) => {
@@ -88,8 +89,9 @@ const CaseStudyCard = ({ study, onView }) => (
   </div>
 )
 
-const CaseStudies = ({ onContactClick }) => {
+const CaseStudies = () => {
   const router = useRouter()
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const caseStudies = [
     { id: 1, title: "Commercial Complex Development", category: "Commercial", description: "Complete development of 50,000 sq.ft. commercial complex with advanced BIM integration", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800", features: ["BIM Modeling", "Cost Optimization"], icon: <Building2 size={14} /> },
     { id: 2, title: "Residential Tower Project", category: "Residential", description: "30-story residential tower with sustainable construction practices", image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=800", features: ["Sustainable Design", "Quality Control"], icon: <Home size={14} /> },
@@ -160,13 +162,47 @@ const CaseStudies = ({ onContactClick }) => {
           ))}
         </div>
 
+        {/* NEW CTA SECTION */}
+        {/* COMPACT CTA SECTION (Matches Image) */}
+        <div className="mt-10 mb-6 px-4">
+          <AnimatedSection animationClass="opacity-0 scale-95" delay={200}>
+            {/* Reduced max-width and vertical padding (py-12) */}
+            <div className="relative overflow-hidden bg-[#0a0a0a]/80 backdrop-blur-xl border border-zinc-900 rounded-[3rem] py-12 px-6 text-center group max-w-3xl mx-auto">
 
+              {/* Subtle Glowing Background */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-[#6EDD4D]/5 blur-[80px] pointer-events-none rounded-full" />
+
+              {/* Smaller, tighter heading */}
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight relative z-10">
+                Ready to move your project forward?
+              </h3>
+
+              <div className="flex justify-center relative z-10">
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  /* Compact button style */
+                  className="bg-[#6EDD4D] text-black font-black px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 hover:bg-white shadow-[0_0_30px_rgba(110,221,77,0.2)] uppercase tracking-widest text-[10px] md:text-xs"
+                >
+                  Let&apos;s Connect
+                  <MoveRight size={18} />
+                </button>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
       </div>
 
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+
+      {/* Modal Rendering */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        initialStep={1}
+      />
     </section>
   )
 }
