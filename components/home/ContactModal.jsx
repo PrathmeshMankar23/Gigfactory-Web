@@ -2,19 +2,22 @@
 
 import React, { useEffect, useState } from 'react';
 
-export default function ContactModal({ isOpen, onClose, preSelectedService }) {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+export default function ContactModal({ isOpen, onClose, preSelectedService, initialStep = 0 }) {
+  // --- NEW STATE: Tracks which screen the user is on ---
+  // 0: Let's Discuss Box, 1: The Form, 2: Success Message
+  const [step, setStep] = useState(initialStep);
   const [isSending, setIsSending] = useState(false);
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      setStep(initialStep); // Reset to requested step when opened
     } else {
       document.body.style.overflow = 'unset';
-      // Reset form state when modal is closed
+      // Reset to initial screen when modal is closed
       setTimeout(() => {
-        setIsSubmitted(false);
+        setStep(0);
         setIsSending(false);
       }, 300);
     }
@@ -30,7 +33,7 @@ export default function ContactModal({ isOpen, onClose, preSelectedService }) {
     // Simulate an API call
     setTimeout(() => {
       setIsSending(false);
-      setIsSubmitted(true);
+      setStep(2); // Move to Success View
     }, 1500);
   };
 
@@ -56,9 +59,31 @@ export default function ContactModal({ isOpen, onClose, preSelectedService }) {
           <i className="fa-solid fa-xmark text-lg"></i>
         </button>
 
-        {!isSubmitted ? (
-          <>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">Let&apos;s Talk</h3>
+        {/* --- STEP 0: INITIAL "LET'S DISCUSS" BOX --- */}
+        {step === 0 && (
+          <div className="py-10 flex flex-col items-center text-center animate-in fade-in zoom-in-95 duration-500">
+            <div className="w-20 h-20 bg-[#6EDD4D]/10 border border-[#6EDD4D]/20 rounded-2xl flex items-center justify-center mb-8 rotate-3">
+              <i className="fa-solid fa-comments text-4xl text-[#6EDD4D]"></i>
+            </div>
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+              Let&apos;s <span className="text-[#6EDD4D]">Discuss</span> <br /> Your Next Project
+            </h3>
+            <p className="text-zinc-400 text-lg max-w-md mb-10 leading-relaxed">
+              Have a vision in mind? We provide the technical expertise to bring it to life.
+            </p>
+            <button
+              onClick={() => setStep(1)} // MOVE TO FORM
+              className="group px-12 py-5 bg-[#6EDD4D] text-zinc-950 font-black rounded-2xl hover:shadow-[0_0_30px_rgba(110,221,77,0.4)] hover:scale-105 transition-all uppercase tracking-widest flex items-center gap-3"
+            >
+              Get in Touch <i className="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            </button>
+          </div>
+        )}
+
+        {/* --- STEP 1: THE CONTACT FORM --- */}
+        {step === 1 && (
+          <div className="animate-in slide-in-from-bottom-4 duration-500">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">Send a Message</h3>
             <p className="text-zinc-400 mb-8">
               {preSelectedService
                 ? `Inquiring about: ${preSelectedService}`
@@ -66,96 +91,75 @@ export default function ContactModal({ isOpen, onClose, preSelectedService }) {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Row 1: Name & Company (Optional) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
-                    Name <span className="text-zinc-600 font-normal normal-case ml-1">(Optional)</span>
-                  </label>
+                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Name</label>
                   <input
                     type="text"
                     placeholder="John Doe"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#6EDD4D] focus:shadow-[0_0_15px_rgba(110,221,77,0.1)] transition-all"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6EDD4D] transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
-                    Company <span className="text-zinc-600 font-normal normal-case ml-1">(Optional)</span>
-                  </label>
+                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Company</label>
                   <input
                     type="text"
                     placeholder="Acme Corp"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#6EDD4D] focus:shadow-[0_0_15px_rgba(110,221,77,0.1)] transition-all"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6EDD4D] transition-all"
                   />
                 </div>
               </div>
 
-              {/* Row 2: Email & Phone (Required) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                    Email <span className="text-[#6EDD4D]">*</span>
-                  </label>
+                  <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Email *</label>
                   <input
                     required
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#6EDD4D] focus:shadow-[0_0_15px_rgba(110,221,77,0.2)] transition-all"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6EDD4D] transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                    Phone Number <span className="text-[#6EDD4D]">*</span>
-                  </label>
+                  <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Phone Number *</label>
                   <input
                     required
                     type="tel"
                     placeholder="+1 (555) 000-0000"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#6EDD4D] focus:shadow-[0_0_15px_rgba(110,221,77,0.2)] transition-all"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6EDD4D] transition-all"
                   />
                 </div>
               </div>
 
-              {/* Message (Required) */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                  Message <span className="text-[#6EDD4D]">*</span>
-                </label>
+                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Message *</label>
                 <textarea
                   required
                   rows="3"
                   placeholder="Tell us about your project requirements..."
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 resize-none focus:outline-none focus:border-[#6EDD4D] focus:shadow-[0_0_15px_rgba(110,221,77,0.2)] transition-all"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white resize-none focus:outline-none focus:border-[#6EDD4D] transition-all"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full bg-[#6EDD4D] text-zinc-950 font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(110,221,77,0.4)] hover:bg-[#5bc43f] disabled:opacity-70 disabled:cursor-not-allowed transition-all uppercase tracking-widest text-sm mt-4 group"
+                className="w-full bg-[#6EDD4D] text-zinc-950 font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(110,221,77,0.4)] disabled:opacity-70 transition-all uppercase tracking-widest text-sm mt-4 group"
               >
-                {isSending ? (
-                  <span className="flex items-center justify-center gap-2">
-                    Sending... <i className="fa-solid fa-circle-notch animate-spin"></i>
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    Send Message <i className="fa-solid fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                  </span>
-                )}
+                {isSending ? 'Sending...' : 'Send Message'}
               </button>
             </form>
-          </>
-        ) : (
-          /* SUCCESS VIEW */
+          </div>
+        )}
+
+        {/* --- STEP 2: SUCCESS VIEW --- */}
+        {step === 2 && (
           <div className="py-12 flex flex-col items-center text-center animate-in zoom-in-90 duration-500">
             <div className="w-24 h-24 bg-[#6EDD4D]/10 border border-[#6EDD4D]/20 rounded-full flex items-center justify-center mb-8">
               <i className="fa-solid fa-check text-5xl text-[#6EDD4D]"></i>
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">Message Received!</h3>
-            <p className="text-zinc-400 text-lg max-w-sm mb-10">
-              Thank you for reaching out.
-            </p>
+            <p className="text-zinc-400 text-lg max-w-sm mb-10">Thank you for reaching out.</p>
             <button
               onClick={onClose}
               className="px-10 py-4 bg-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-700 transition-all uppercase tracking-widest text-xs"

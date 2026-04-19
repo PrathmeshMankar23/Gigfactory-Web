@@ -118,7 +118,7 @@ const CaseStudies = ({ onContactClick }) => {
         {/* Header */}
         <div className="text-center mb-16">
           <AnimatedSection animationClass="opacity-0 -translate-y-10">
-            <h2 className="text-5xl md:text-7xl font-medium text-white mb-6 tracking-tight">
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
               Case <span className="text-[#6EDD4D]">Studies</span>
             </h2>
             <p className="max-w-2xl mx-auto text-zinc-400 text-lg font-semibold leading-relaxed">
@@ -160,18 +160,7 @@ const CaseStudies = ({ onContactClick }) => {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-20 flex justify-center">
-          <AnimatedSection animationClass="opacity-0 scale-95" delay={200}>
-            <button
-              onClick={onContactClick}
-              className="group relative inline-flex items-center gap-3 rounded-full bg-[#6EDD4D] px-10 py-4 font-bold uppercase tracking-widest text-zinc-950 transition-all hover:bg-white"
-            >
-              Let&apos;s Connect
-              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-            </button>
-          </AnimatedSection>
-        </div>
+
       </div>
 
       <style jsx global>{`

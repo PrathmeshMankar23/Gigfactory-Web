@@ -132,9 +132,9 @@ export default function Hero({ onContactClick }) {
           <div className="flex justify-center">
             <button
               onClick={onContactClick}
-              className="bg-[#6EDD4D] text-black font-black px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:bg-[#5bc43f] shadow-[0_0_40px_rgba(110,221,77,0.5)] flex items-center gap-3"
+              className="bg-[#6EDD4D] text-black font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:bg-[#5bc43f] shadow-[0_0_30px_rgba(110,221,77,0.3)] flex items-center gap-2"
             >
-              Let&apos;s Connect <span className="text-2xl leading-none">→</span>
+              Let&apos;s Connect <span className="text-xl leading-none">→</span>
             </button>
           </div>
         </AnimatedSection>
